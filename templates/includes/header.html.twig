@@ -1,14 +1,18 @@
 {% block header %}
-    <header>
-        {% if currentUser is defined and currentUser %}
-            {% if page != 'account' %} <a href="{{ path('account') }}">account</a> {% endif %}
-            {% if page != 'game' %} <a href="{{ path('game') }}">game</a> {% endif %}
-            {% if 'ROLE_ADMIN' in currentUser.roles and page != 'admin' %} <a href="{{ path('admin') }}">admin</a> {% endif %}
-            <a href="{{ path('app_logout') }}">logout</a>
-        {% else %}
-            {% if page != 'login' %} <a href="{{ path('app_login') }}">login</a> {% endif %}
-            {% if page != 'register' %} <a href="{{ path('app_register') }}">register</a> {% endif %}
-        {% endif %}
+    <header class="modal-header bg-warning">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand link-secondary" href="{{ path('home') }}">Banane Clicker</a>
+            <ul class="navbar-nav me-auto">
+                {% if currentUser is defined and currentUser %}
+                    {% if page != 'account' %} <li class="nav-item text-white"><a class="nav-link" href="{{ path('account') }}">account</a></li> {% endif %}
+                    {% if page != 'game' %} <li class="nav-item text-white"><a class="nav-link" href="{{ path('game') }}">game</a></li> {% endif %}
+                    {% if 'ROLE_ADMIN' in currentUser.roles and page != 'admin' %} <li class="nav-item text-white"><a class="nav-link" href="{{ path('admin') }}">admin</a></li> {% endif %}
+                    <a class="nav-link" href="{{ path('app_logout') }}">logout</a>
+                {% else %}
+                    {% if page != 'login' %} <li class="nav-item text-white"><a class="nav-link" href="{{ path('app_login') }}">login</a></li> {% endif %}
+                    {% if page != 'register' %} <li class="nav-item text-white"><a class="nav-link" href="{{ path('app_register') }}">register</a></li> {% endif %}
+                {% endif %}
+            </ul>
+        </nav>
     </header>
-    <br/>
 {% endblock %}

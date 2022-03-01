@@ -21,7 +21,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/user', name:'userList')]
+    #[Route('/admin/u', name:'userList')]
     public function userList(ManagerRegistry $doctrine):Response
     {
         $currentUser = $this->getUser();
@@ -29,14 +29,14 @@ class AdminController extends AbstractController
         $em = $doctrine->getManager();
         $users = $em->getRepository(User::class)->findAll();
 
-        return $this->render('admin/list.html.twig', [
+        return $this->render('admin/users/list.html.twig', [
             'page' => 'adminUserList',
             'currentUser' => $currentUser,
             'users' => $users,
         ]);
     }
 
-    #[Route('/admin/user/{id}', name: 'userEdit')]
+    #[Route('/admin/u/{id}', name: 'userEdit')]
     public function userEdit(ManagerRegistry $doctrine, int $id):Response
     {
         $currentUser = $this->getUser();
@@ -44,12 +44,29 @@ class AdminController extends AbstractController
         $em = $doctrine->getManager();
         $user = $em->getRepository(User::class)->findOneBy(['id' => $id]);
 
-        if (!$user) {
-            return $this->redirectToRoute('userList');
-        }
+        if (!$user) return $this->redirectToRoute('userList');
 
-        return $this->render('admin/edit.html.twig', [
+        return $this->render('admin/users/edit.html.twig', [
             'page' => 'adminUserEdit',
+            'currentUser' => $currentUser,
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/admin/u/{id}/delete', name: 'userDelete')]
+    public function userDelete(ManagerRegistry $doctrine, int $id):Response
+    {
+        $currentUser = $this->getUser();
+
+        $em = $doctrine->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(['id' => $id]);
+
+        if (!$user) return $this->redirectToRoute('userList');
+
+
+
+        return $this->render('admin/users/delete.html.twig', [
+            'page' => 'adminUserDelete',
             'currentUser' => $currentUser,
             'user' => $user,
         ]);

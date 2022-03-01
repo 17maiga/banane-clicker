@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccountController extends AbstractController
 {
-    #[Route('/account', name: 'account')]
+    #[Route('/u', name: 'account')]
     public function index(): Response
     {
         $currentUser = $this->getUser();

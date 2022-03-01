@@ -3,5 +3,6 @@
 {% block title %}Edit {{ user.username }}{% endblock %}
 
 {% block body %}
-{{ user.username }}
+    {% include 'includes/header.html.twig' %}
+    {{ user.username }}
 {% endblock %}
