@@ -3,7 +3,6 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% include '/includes/header.html.twig' %}
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.username, {
             label: 'Username :'

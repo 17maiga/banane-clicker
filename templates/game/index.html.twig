@@ -3,6 +3,23 @@
 {% block title %}Banane Clicker{% endblock %}
 
 {% block body %}
-    {% include '/includes/header.html.twig' %}
-    <div>welcome to the game !</div>
+    <div class="row">
+        <div class="col">
+            <img src="{{ asset('img/banana.png') }}" alt="the banana" style="max-width: 500px"/>
+        </div>
+        <div class="col">
+            <div>welcome to the game !</div>
+            <div {{ stimulus_controller('game') }}>
+                <label>
+                    <input type="text" class="text-light bg-dark border-light rounded" {{ stimulus_target('game', 'name') }}>
+                </label>
+
+                <button {{ stimulus_action('game', 'greet') }} class="text-warning bg-dark border-warning rounded">
+                    Greet
+                </button>
+
+                <div {{ stimulus_target('game', 'output') }}></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} List of users {% endblock %}
+
+{% block body %}
+    <table class="table text-light">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>username</th>
+                <th>role</th>
+                <th>actions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        {% if "ROLE_ADMIN" in user.roles %}
+                            admin
+                        {% elseif 'ROLE_MODERATOR' in user.roles %}
+                            moderator
+                        {% else %}
+                            user
+                        {% endif %}
+                    </td>
+                    {% if user.username != 'moderation' %}
+                        <td>
+                            {% if currentUser.userIdentifier == 'moderation' %}
+                            <a href="{{ path('moderation_user_promote', { id: user.id }) }}">
+                                {% if "ROLE_ADMIN" in user.roles %}
+                                    demote
+                                {% else %}
+                                    promote
+                                {% endif %}
+                            </a>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if currentUser.userIdentifier == 'moderation' or 'ROLE_ADMIN' not in user.roles %}
+                                <a href="{{ path('moderation_user_delete', { id: user.id }) }}">delete</a></td>
+                            {% endif %}
+                    {% else %}
+                        <td></td><td></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

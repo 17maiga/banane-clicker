@@ -3,7 +3,6 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-    {% include '/includes/header.html.twig' %}
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}

@@ -3,6 +3,5 @@
 {% block title %}Administration{% endblock %}
 
 {% block body %}
-    {% include '/includes/header.html.twig' %}
-    <a href="{{ path('userList') }}">View users</a>
+    <a href="{{ path('moderation_user_list') }}" class="link-light">View users</a>
 {% endblock %}

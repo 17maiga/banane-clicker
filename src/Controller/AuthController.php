@@ -61,6 +61,7 @@ class AuthController extends AbstractController implements AccessDeniedHandlerIn
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setScore(0);
 
             $entityManager->persist($user);
             $entityManager->flush();

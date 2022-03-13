@@ -11,11 +11,9 @@ class GameController extends AbstractController
     #[Route('/game', name: 'game')]
     public function index(): Response
     {
-        $currentUser = $this->getUser();
-
         return $this->render('game/index.html.twig', [
             'page' => 'game',
-            'currentUser' => $currentUser,
+            'currentUser' => $this->getUser(),
         ]);
     }
 }
