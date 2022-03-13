@@ -10,13 +10,21 @@
         <div class="col">
             <div>welcome to the game !</div>
             <div {{ stimulus_controller('game') }}>
+                <div {{ stimulus_target('game', 'score') }} id="score">10</div>
                 <label>
                     <input type="text" class="text-light bg-dark border-light rounded" {{ stimulus_target('game', 'name') }}>
                 </label>
 
-                <button {{ stimulus_action('game', 'greet') }} class="text-warning bg-dark border-warning rounded">
-                    Greet
+                <button {{ stimulus_action('game', 'save') }} class="text-warning bg-dark border-warning rounded">
+                    Save
                 </button>
+
+                {% for upgrade in upgrades %}
+                    <div {{ stimulus_target('game', 'upgrade') }}>
+                        <div class="name">{{ upgrade[name] }}</div>
+                        <div class="value">{{ upgrade[value] }}</div>
+                    </div>
+                {% endfor %}
 
                 <div {{ stimulus_target('game', 'output') }}></div>
             </div>

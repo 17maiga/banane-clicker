@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private int $score;
 
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Data::class, cascade: ['persist', 'remove'])]
+    private $data;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,6 +113,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setScore(int $score): self
     {
         $this->score = $score;
+
+        return $this;
+    }
+
+    public function getData(): ?Data
+    {
+        return $this->data;
+    }
+
+    public function setData(Data $data): self
+    {
+        // set the owning side of the relation if necessary
+        if ($data->getUser() !== $this) {
+            $data->setUser($this);
+        }
+
+        $this->data = $data;
 
         return $this;
     }
