@@ -3,14 +3,30 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+    {# Register form #}
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username, {
-            label: 'Username :'
-        }) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password :'
-        }) }}
-
-        <button type="submit" class="text-warning bg-dark border-warning rounded">Register</button>
+    <div class="grid">
+        <div class="row">
+            <div class="col-1">
+                {{ form_label(registrationForm.username) }}
+            </div>
+            <div class="col-10">
+                {{ form_widget(registrationForm.username, { attr: {
+                    class: "text-warning bg-dark border-white rounded w-100"
+                } }) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                {{ form_label(registrationForm.plainPassword, 'Password') }}
+            </div>
+            <div class="col-10">
+                {{ form_widget(registrationForm.plainPassword, { attr: {
+                    class: "text-warning bg-dark border-white rounded w-100"
+                } }) }}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="text-warning bg-dark border-warning rounded">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

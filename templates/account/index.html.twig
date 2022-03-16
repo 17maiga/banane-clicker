@@ -3,5 +3,45 @@
 {% block title %}Your Account{% endblock %}
 
 {% block body %}
-    <div class="main_content">Hi, {{ currentUser.userIdentifier }}!</div>
+    {# Render the user's information #}
+    <div class="grid">
+        <div class="row">
+            <div class="col">
+                Hi, {{ currentUser.username }}!
+            </div>
+            <div class="col">
+                {# Link to change the user's username ('/u/edit') #}
+                <a href="{{ path('account_edit') }}" class="link-warning">Change username</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Your currently own <b>{{ currentUser.score }}</b> bananas.
+            </div>
+            <div class="col">
+                {# Link to reset the user's in-game data #}
+                <a href="{{ path('account_reset') }}" class="link-warning">Reset progress</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">You also own these upgrades:</div>
+            <div class="col">
+                <div class="grid">
+                    {# display all upgrades and the amount owned by the user #}
+                    {% for upgrade in upgrades %}
+                        <div class="row">
+                            <div class="col-3">{{ upgrade.name }}</div>
+                            <div class="col">
+                                {% if currentUser.data[upgrade.name] is defined %}
+                                    {{ currentUser.data[upgrade.name] }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

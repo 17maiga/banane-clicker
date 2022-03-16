@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit profile{% endblock %}
+
+{% block body %}
+    {# This form allows a user to change their username #}
+    {{ form_start(form) }}
+    <div class="grid">
+        <div class="row">
+            <div class="col">
+                {{ form_label(form.username, 'Enter new username') }}
+            </div>
+            <div class="col">
+                {{ form_widget(form.username, { attr: {
+                    class: "text-warning bg-dark border-white rounded w-100",
+                    value: currentUser.username
+                } }) }}
+            </div>
+            <div class="col">
+                <button type="reset" class="text-warning bg-dark border-warning rounded">Reset</button>
+                <button type="submit" class="text-warning bg-dark border-warning rounded">Save modifications</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

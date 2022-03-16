@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Upgrades{% endblock %}
+
+{% block body %}
+    <table class="table text-light">
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>price</th>
+            <th>bps</th>
+            <th colspan="2">actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {# List all upgrades, with links to edit/delete them #}
+        {% for upgrade in upgrades %}
+            <tr>
+                <td>{{ upgrade.name }}</td>
+                <td>{{ upgrade.price }}</td>
+                <td>{{ upgrade.bananasPerSecond }}</td>
+                <td><a href="{{ path('admin_upgrade_edit', { id: upgrade.id }) }}" class="link-warning">edit</a></td>
+                <td><a href="{{ path('admin_upgrade_delete', { id: upgrade.id }) }}" class="link-warning">delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

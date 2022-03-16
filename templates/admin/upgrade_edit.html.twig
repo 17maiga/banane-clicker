@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit {{ upgrade.name }}{% endblock %}
+
+{% block body %}
+    {# Form to edit an existing upgrade's info #}
+    {{ form_start(form) }}
+    <div class="grid">
+        <div class="row">
+            <div class="col-2">
+                {{ form_label(form.name) }}
+            </div>
+            <div class="col-10">
+                {{ form_widget(form.name, { attr: {
+                    class: "text-warning bg-dark border-white rounded w-100",
+                    value: upgrade.name
+                } }) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                {{ form_label(form.bananasPerSecond, 'Bananas per second') }}
+            </div>
+            <div class="col-10">
+                {{ form_widget(form.bananasPerSecond, { attr: {
+                    class: "text-warning bg-dark border-white rounded w-100",
+                    value: upgrade.bananasPerSecond
+                } }) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                {{ form_label(form.price) }}
+            </div>
+            <div class="col-10">
+                {{ form_widget(form.price, { attr: {
+                    class: "text-warning bg-dark border-white rounded w-100",
+                    value: upgrade.price
+                } }) }}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="text-warning bg-dark border-warning rounded">Save changes</button>
+    <button type="reset" class="text-warning bg-dark border-warning rounded">Reset</button>
+    {{ form_end(form) }}
+{% endblock %}

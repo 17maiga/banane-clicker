@@ -3,28 +3,28 @@
 {% block title %}Banane Clicker{% endblock %}
 
 {% block body %}
-    <div class="row">
+    {# Architecture built to handle the game's JS actions #}
+    <div class="row" {{ stimulus_controller('game') }}>
         <div class="col">
-            <img src="{{ asset('img/banana.png') }}" alt="the banana" style="max-width: 500px"/>
+            <img src="{{ asset('img/banana.png') }}"
+                 alt="the banana"
+                 style="max-width: 500px"
+                 data-action="click->game#add"
+            />
         </div>
         <div class="col">
-            <div>welcome to the game !</div>
-            <div {{ stimulus_controller('game') }}>
-                <div {{ stimulus_target('game', 'score') }} id="score">10</div>
-                <label>
-                    <input type="text" class="text-light bg-dark border-light rounded" {{ stimulus_target('game', 'name') }}>
-                </label>
+            <div>
+                <div>
+                    Bananas :
+                    <b {{ stimulus_target('game', 'score') }}id="score"></b>
+                </div>
 
-                <button {{ stimulus_action('game', 'save') }} class="text-warning bg-dark border-warning rounded">
+                <button {{ stimulus_action('game', 'save') }}
+                        class="text-warning bg-dark border-warning rounded">
                     Save
                 </button>
 
-                {% for upgrade in upgrades %}
-                    <div {{ stimulus_target('game', 'upgrade') }}>
-                        <div class="name">{{ upgrade[name] }}</div>
-                        <div class="value">{{ upgrade[value] }}</div>
-                    </div>
-                {% endfor %}
+                <div {{ stimulus_target('game', 'upgradeContainer') }}></div>
 
                 <div {{ stimulus_target('game', 'output') }}></div>
             </div>

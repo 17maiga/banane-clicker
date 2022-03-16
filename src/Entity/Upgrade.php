@@ -19,6 +19,9 @@ class Upgrade
     #[ORM\Column(type: 'integer')]
     private $bananasPerSecond;
 
+    #[ORM\Column(type: 'integer')]
+    private $price;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Upgrade
     public function setBananasPerSecond(int $bananasPerSecond): self
     {
         $this->bananasPerSecond = $bananasPerSecond;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

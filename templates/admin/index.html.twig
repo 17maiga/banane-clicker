@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    {# Links to list the upgrades and create a new upgrade #}
+    <div><a href="{{ path('admin_upgrade') }}" class="link-warning">View upgrades</a></div>
+    <div><a href="{{ path('admin_upgrade_create') }}" class="link-warning">Create upgrade</a></div>
+{% endblock %}

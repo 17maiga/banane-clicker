@@ -1,4 +1,5 @@
 {% block header %}
+    {# Global header, included in every page. Displays links to all major parts of the website except the one currently opened, and the login/register links if the user isn't logged in, or the logout link if the user is logged in #}
     <header class="modal-header bg-warning text-light">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand link-light" href="{{ path('home') }}">Banane Clicker</a>
@@ -6,7 +7,8 @@
                 {% if currentUser is defined and currentUser %}
                     {% if page != 'account' %} <li class="nav-item text-white"><a class="nav-link link-light" href="{{ path('account') }}">account</a></li> {% endif %}
                     {% if page != 'game' %} <li class="nav-item text-white"><a class="nav-link link-light" href="{{ path('game') }}">game</a></li> {% endif %}
-                    {% if 'ROLE_MODERATOR' in currentUser.roles and page != 'moderation' %} <li class="nav-item text-white"><a class="nav-link link-light" href="{{ path('moderation') }}">moderation</a></li> {% endif %}
+                    {% if 'ROLE_MODERATOR' in currentUser.roles and page != 'moderation' %} <li class="nav-item text-white"><a class="nav-link link-light" href="{{ path('mod') }}">moderation</a></li> {% endif %}
+                    {% if 'ROLE_ADMIN' in currentUser.roles and page != 'admin' %} <li class="nav-item text-white"><a class="nav-link link-light" href="{{ path('admin') }}">administration</a></li> {% endif %}
                     <a class="nav-link link-light" href="{{ path('app_logout') }}">logout</a>
                 {% else %}
                     {% if page != 'login' %} <li class="nav-item text-white"><a class="nav-link link-light" href="{{ path('app_login') }}">login</a></li> {% endif %}

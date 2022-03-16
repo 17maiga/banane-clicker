@@ -32,8 +32,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private int $score;
 
-    #[ORM\OneToOne(mappedBy: 'user', targetEntity: Data::class, cascade: ['persist', 'remove'])]
-    private $data;
+    #[ORM\Column(type: 'json')]
+    private $data = [];
 
     public function getId(): ?int
     {
@@ -117,18 +117,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getData(): ?Data
+    public function getData(): ?array
     {
         return $this->data;
     }
 
-    public function setData(Data $data): self
+    public function setData(array $data): self
     {
-        // set the owning side of the relation if necessary
-        if ($data->getUser() !== $this) {
-            $data->setUser($this);
-        }
-
         $this->data = $data;
 
         return $this;

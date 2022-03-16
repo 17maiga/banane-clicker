@@ -3,14 +3,14 @@
 {% block title %} List of users {% endblock %}
 
 {% block body %}
+    {# List all users, with links to promote/demote them to and from moderator, or delete them, if the current user has the appropriate permissions #}
     <table class="table text-light">
         <thead>
             <tr>
                 <th>id</th>
                 <th>username</th>
                 <th>role</th>
-                <th>actions</th>
-                <th></th>
+                <th colspan="2">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,11 +27,11 @@
                             user
                         {% endif %}
                     </td>
-                    {% if user.username != 'moderation' %}
+                    {% if "ROLE_ADMIN" not in user.roles %}
                         <td>
-                            {% if currentUser.userIdentifier == 'moderation' %}
-                            <a href="{{ path('moderation_user_promote', { id: user.id }) }}">
-                                {% if "ROLE_ADMIN" in user.roles %}
+                            {% if "ROLE_ADMIN" in currentUser.roles %}
+                            <a class="link-warning" href="{{ path('mod_user_promote', { id: user.id }) }}">
+                                {% if "ROLE_MODERATOR" in user.roles %}
                                     demote
                                 {% else %}
                                     promote
@@ -41,7 +41,7 @@
                         </td>
                         <td>
                             {% if currentUser.userIdentifier == 'moderation' or 'ROLE_ADMIN' not in user.roles %}
-                                <a href="{{ path('moderation_user_delete', { id: user.id }) }}">delete</a></td>
+                                <a class="link-warning" href="{{ path('mod_user_delete', { id: user.id }) }}">delete</a></td>
                             {% endif %}
                     {% else %}
                         <td></td><td></td>
