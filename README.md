@@ -10,7 +10,7 @@ Essentially the same thing except it's a different fruit and it is built using t
 
 ### SETUP INSTRUCTIONS
 
-You must have a MySQL server installed and running, as well as Composer, Symfony-cli, and NodeJS installed.
+You must have a [MySQL](https://www.mysql.com/fr/downloads/) server installed and running, as well as [Composer](https://getcomposer.org/download/), [Symfony-cli](https://symfony.com/download), and [NodeJS](https://nodejs.dev/) installed.
 
 Import the database from the `banane.sql` file to your MySQL server.
 
